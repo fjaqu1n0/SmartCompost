@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="style.css" rel="stylesheet"> 
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+    <script src="Test.js"></script>
+</head>
+<body>
+  <h2>Real-Time Compost Monitoring System</h2>
+  <div id="labelSensor" class="label">
+    <h3> Sensor Data </h3>
+  </div>
+  
+  <div id="SensorData" class="container">
+    <div id="Humi" class="x">
+      <canvas id="HumiChart"></canvas>
+    </div><!--Humi-->
+    <div id="AirTemp" class="y">
+      <canvas id="AirTempChart"></canvas>
+    </div><!--AirTemp-->
+    <div id="SoilTemp" class="z">
+      <canvas id="SoilTempChart"></canvas>
+    </div><!--SoilTemp-->
+  </div><!--SensorData-->
+
+  <div id="SoilData" class="container">
+    <div id="SoilMoisture" class="a">
+      <canvas id="SoilMoistureChart"></canvas>
+    </div><!--SoilMoisture-->
+    <div id="SoilpH" class="b">
+      <canvas id="SoilpHChart"></canvas>
+    </div><!--SoilpH-->
+  </div><!--SoilData-->
+
+</body>
+</html>
