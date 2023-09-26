@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="style.css" rel="stylesheet"> 
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+    <script src="script.js"></script>
+    <title>Real-Time Compost Monitor - Sensor 1 Data</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body>
+    <header>
+        <div class = "navigator">
+            <p class = "Head">Compost Sensor Data Real-Time Stream </p>
+          <nav>
+            <a href = "index.html">Sensor Data</a></li>
+            <a class="active" href="DHT11.html"> DHT 11 Data </a>
+          </nav>
+        </div>
+        
+      </header>
+
+  <h2>Real-Time Compost Monitoring System</h2>
+  <div id="labelSensor" class="label">
+    <h3> DHT 11 Data </h3>
+  </div>
+
+  <div id="SensorData" class="container">
+    <div id="Humi" class="chart-container">
+        <canvas id="HumiChart"></canvas>
+    </div>
+    <div id="AirTemp" class="chart-container">
+        <canvas id="AirTempChart"></canvas>
+    </div>
+</div>
+  
+
+</body>
+</html>
