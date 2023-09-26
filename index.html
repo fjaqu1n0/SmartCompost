@@ -1,50 +1,59 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <link href="style.css" rel="stylesheet"> 
+    <link href="style.css" rel="stylesheet">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-    <script src="Test.js"></script>
+    <script src="script.js"></script>
     <title>Real-Time Compost Monitor - Sensor 1 Data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <body>
-  <header>
-    <div class = "navigator">
-      <p class = "Head">Compost Sensor Data Real-Time Stream </p>
-      <nav>
-        <a class="active" href = "index.html"> Sensor 1 Data</a>
-        <a href = "Sensor2.html"> Sensor 2 Data </a></li>
-        <a href = "Sensor2.html"> About</a></li>
-      </nav>
+    <header>
+        <div class="navigator">
+            <p class="Head">Compost Sensor Data Real-Time Stream </p>
+            <nav>
+                <a class="active" href="index.html"> Sensor Data</a>
+                <a href="DHT11.html"> DHT 11 Data </a>
+            </nav>
+        </div>
+    </header>
+    <h2>Real-Time Compost Monitoring System</h2>
+    <div id="labelSensor" class="label">
+        <h3> Sensor 1 Data </h3>
     </div>
-    
-  </header>
-  <h2>Real-Time Compost Monitoring System</h2>
-  <div id="labelSensor" class="label">
-    <h3> Sensor 1 Data </h3>
-  </div>
-  
-  <div id="SensorData" class="container">
-    <div id="Humi" class="x">
-      <canvas id="HumiChart"></canvas>
-    </div><!--Humi-->
-    <div id="AirTemp" class="y">
-      <canvas id="AirTempChart"></canvas>
-    </div><!--AirTemp-->
-    <div id="SoilTemp" class="z">
-      <canvas id="SoilTempChart"></canvas>
-    </div><!--SoilTemp-->
-  </div><!--SensorData-->
+    <div id="SensorData" class="container">
+        <div id="SoilTemp" class="chart-container">
+            <canvas id="SoilTempChart"></canvas>
+        </div>
+        <div id="SoilMoisture" class="chart-container">
+            <canvas id="SoilMoistureChart"></canvas>
+        </div>
 
-  <div id="SoilData" class="container">
-    <div id="SoilMoisture" class="a">
-      <canvas id="SoilMoistureChart"></canvas>
-    </div><!--SoilMoisture-->
-    <div id="SoilpH" class="b">
-      <canvas id="SoilpHChart"></canvas>
-    </div><!--SoilpH-->
-  </div><!--SoilData-->
+        <div id="SoilpH" class="chart-container">
+            <canvas id="SoilpHChart"></canvas>
+        </div>
+    </div>
 
+    <div id="labelSensor" class="label">
+        <h3> Sensor 2 Data </h3>
+    </div>
+
+    <div id="SensorData" class="container">
+        <div id="SoilTemp" class="chart-container">
+            <canvas id="SoilTempChart2"></canvas>
+        </div>
+        <div id="SoilMoisture" class="chart-container">
+            <canvas id="SoilMoistureChart2"></canvas>
+        </div>
+
+        <div id="SoilpH" class="chart-container">
+            <canvas id="SoilpHChart2"></canvas>
+        </div>
+    </div>
+   
 </body>
+
 </html>
