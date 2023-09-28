@@ -1,0 +1,199 @@
+
+.container{
+    display:flex;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+    background: #e3cfcf;
+    }
+
+.label{
+    flex:1;
+    vertical-align: middle;
+    text-align: center;
+} 
+
+/* Make the header flexible and responsive */
+header {
+    display: flex;
+    flex-wrap: wrap; /* Allow content to wrap when needed */
+    align-items: center; /* Vertically center content */
+}
+
+.navigator {
+    background-color: #333;
+    overflow: hidden;
+    flex: 3; /* Take up remaining space in the header */
+    text-align: left; /* Align the navigator to the left */
+    padding: 0 1%; /* Add some padding to the left and right */
+  }
+
+.navigator a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 16px 17px;
+    text-decoration: none;
+  }
+
+  nav{
+    float:right;
+  }
+
+.Head{
+    float: left;
+    color: #f2f2f2;
+    text-decoration: none;
+    margin-left: 0;
+    font-size: 10; /* Adjust font size as needed */
+}
+
+.navigator a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+.navigator a.active {
+    background-color: #4c6159;
+    color: white;
+  }
+
+  
+h2{
+    text-align: center;
+}
+
+/* Make the chart containers responsive */
+.chart-container {
+    flex: 1; /* Equal width for all chart containers */
+    text-align: center;
+    background-color: rgba(70, 163, 71, 0.64);;
+    margin: 10px;
+    position: relative;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.chart {
+    width: 80%; /* Adjust the width as needed */
+    margin: 10px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .Head {
+        font-size: 1.2rem;
+    }
+
+    .navigator a {
+        padding: 1% 1%;
+    }
+
+    /* Stack chart containers vertically for better visibility */
+    .container {
+        flex-direction: column;
+    }
+}
+
+/* Media query for smaller screens (e.g., tablets) */
+@media screen and (max-width: 1024px) {
+    /* Adjust the font size for smaller screens */
+    .Head {
+        font-size: 1.5rem;
+    }
+    
+    .navigator a {
+        padding: 1% 1%;
+    }
+    
+    /* Stack chart containers vertically for better visibility */
+    .container {
+        flex-direction: column;
+    }
+
+        /* Additional styles for very small screens */
+        .chart-container {
+            margin: 5px;
+        }
+    
+        /* Make the navbar flexible */
+        .navigator {
+            padding: 1%;
+        }
+}
+
+/* Media query for split-screen mode (e.g., tablets in landscape orientation) */
+@media screen and (max-width: 1024px) {
+    /* Adjust the font size for smaller screens */
+    .Head {
+        font-size: 1.5rem;
+    }
+
+    .navigator a {
+        padding: 1% 1%;
+    }
+
+    /* Stack chart containers vertically for better visibility */
+    .container {
+        flex-direction: column;
+    }
+
+    /* Additional styles for smaller screens */
+    .chart-container {
+        margin: 5px;
+    }
+
+    /* Make the navbar flexible */
+    .navigator {
+        padding: 1%;
+        text-align: center; /* Center-align the navbar links */
+    }
+
+    .navigator a {
+        display: block; /* Display links as blocks for easier tapping */
+    }
+}
+
+/* Media query for smaller screens (e.g., smartphones) */
+@media screen and (max-width: 768px) {
+    /* Adjust the font size for smaller screens */
+    .Head {
+        font-size: 1.2rem;
+    }
+
+    .navigator a {
+        padding: 1% 1%;
+    }
+
+    /* Stack chart containers vertically for better visibility */
+    .container {
+        flex-direction: column;
+    }
+
+    /* Additional styles for very small screens */
+    .chart-container {
+        margin: 5px;
+    }
+
+    /* Make the navbar flexible */
+    .navigator {
+        padding: 1%;
+        text-align: center; /* Center-align the navbar links */
+    }
+
+    .navigator a {
+        display: block; /* Display links as blocks for easier tapping */
+    }
+}
+
