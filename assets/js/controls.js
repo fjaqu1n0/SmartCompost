@@ -48,3 +48,25 @@ updateSwitchState(toggle, txt, "toggleState");
 updateSwitchState(toggle1, txt1, "toggle1State");
 updateSwitchState(toggle2, txt2, "toggle2State");
 updateSwitchState(toggle3, txt3, "toggle3State");
+
+document.addEventListener('DOMContentLoaded', function() {
+  const toggleSwitches = document.querySelectorAll('.toggle-btn');
+  toggleSwitches.forEach(switchElement => {
+      switchElement.addEventListener('click', function() {
+          const device = this.dataset.device;
+          const isActive = this.classList.toggle('active');
+          const state = isActive ? 'on' : 'off';
+          // Find the sibling .text div inside the same container
+          const textElement = this.parentElement.nextElementSibling;
+          textElement.textContent = state.toUpperCase();
+          toggleDevice(device, state);
+      });
+  });
+});
+
+function toggleDevice(device, state) {
+  fetch(`http://192.168.1.128:5000/control/${device}/${state}`, { method: 'GET' })
+  .then(response => response.text())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+}
