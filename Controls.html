@@ -21,10 +21,6 @@
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -75,9 +71,9 @@
       </li><!-- End Controls Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="DataLogs.html">
-          <i class='bx bxs-bell'></i>
-          <span>Data Logs</span>
+        <a class="nav-link collapsed" href="DataTable.html">
+          <i class='bx bx-table'></i>
+          <span>Data Table</span>
         </a>
       </li><!-- End Data Logs Page Nav -->
 
@@ -100,7 +96,7 @@
           <div class="label">Mixer</div>
           <div class="container">
             <div class="toggle">
-              <div class="toggle-btn" onclick="Toggle()"></div>
+              <div id="motorButton" class="toggle-btn" data-device="motor"></div>
             </div>
             <div class="text">OFF</div>
           </div>
@@ -111,7 +107,7 @@
           <div class="label">CPU Fan</div>
          <div class="container">
             <div class="toggle1">
-              <div class="toggle-btn" onclick="Toggle1()"></div>
+              <div  id="fanButton" class="toggle-btn" data-device="fan"></div>
             </div>
             <div class="text1">OFF</div>
           </div>
@@ -122,7 +118,7 @@
           <div class="label">Water Pump</div>
           <div class="container">
             <div class="toggle2">
-              <div class="toggle-btn" onclick="Toggle2()"></div>
+              <div id="pumpButton" class="toggle-btn" data-device="pump"></div>
             </div>
             <div class="text2">OFF</div>
           </div>
@@ -133,7 +129,7 @@
           <div class="label">Heater</div>
           <div class="container">
             <div class="toggle3">
-              <div class="toggle-btn" onclick="Toggle3()"></div>
+              <div id="heaterButton" class="toggle-btn" data-device="heater"></div>
             </div>
             <div class="text3">OFF</div>
           </div>
@@ -160,16 +156,6 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/chart.js/chart.umd.js"></script>
-  <script src="assets/vendor/echarts/echarts.min.js"></script>
-  <script src="assets/vendor/quill/quill.min.js"></script>
-  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
