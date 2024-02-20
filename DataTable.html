@@ -60,7 +60,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="index.html">
           <i class='bx bx-line-chart'></i>
-          <span>Home</span>
+          <span>Dashboard</span>
         </a>
       </li><!-- End Home Nav -->
 
@@ -95,38 +95,49 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Sensor Data</h5>
-              <button id="exportButton">Export</button>
-              <button id="DeleteButton">Delete</button>
+              
+             
 
               <!-- Table with stripped rows -->
-              <table class="table datatable" id ="sensorData">
+              
+              <table class="table datatable" id="sensorData">
                 <thead>
                   <tr>
                     <th>
-                      <b>Timestamp</b>
+                      <b>T</b>imestamp
                     </th>
                     <th>Humidity</th>
-                    <th>Air Temp</th>
-                    <th>Soil Temp</th>
+                    <th>Air Temperature</th>
+                    <th>Soil Temperature</th>
                     <th>Soil Moisture</th>
                     <th>Soil pH</th>
-                    <!--<th>Soil Temp 2</th>
-                    <th>Soil Moisture 2</th>
-                    <th>Soil pH 2</th>-->
                   </tr>
                 </thead>
                 <tbody>
-               
+                 
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
-
+            
             </div>
           </div>
 
         </div>
       </div>
     </section>
+    <div class="button-container">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+          Export
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li><a href="#" id="exportCsv">CSV</a></li>
+          <li><a href="#" id="exportSQL">SQL</a></li>
+          <li><a href="#" id ="exportTXT">TXT</a></li>
+        </ul>
+      </div>
+      <button id="deleteButton">Delete</button>
+    </div>
 
   </main><!-- End #main -->
 
@@ -152,6 +163,8 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/tables.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
