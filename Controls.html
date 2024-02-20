@@ -88,7 +88,7 @@
       </nav>
     </div><!-- End Page Title -->
 
-  <section class="section">
+   <section class="section">
       <div class="iconslist">
 
         <div class="icon">
@@ -98,7 +98,17 @@
             <div class="toggle">
               <div id="motorButton" class="toggle-btn" data-device="motor"></div>
             </div>
-            <div class="text">OFF</div>
+            <br><br>
+            <div class="text3">OFF</div>
+          </div>
+          <div class="text3">Speed Control</div>
+          <div class="slider-container">
+            <div class="slider">
+              <div id="slider-value-left">0</div>
+              <input type = "range" min="0" max="255" id="Slide">
+              <div id="slider-value-right">255</div>
+            </div>
+            <div id="slider-value-mixer" class="slider-value">0</div>
           </div>
         </div>
 
@@ -109,7 +119,17 @@
             <div class="toggle1">
               <div  id="fanButton" class="toggle-btn" data-device="fan"></div>
             </div>
-            <div class="text1">OFF</div>
+            <br><br>
+            <div class="text3">OFF</div>
+          </div>
+          <div class="text3">Speed Control</div>
+          <div class="slider-container">
+            <div class="slider">
+              <div id="slider-value-left">0</div>
+              <input type = "range" min="0" max="255" id="Slide1">
+              <div id="slider-value-right">255</div>
+            </div>
+            <div id="slider-value-fan" class="slider-value">0</div>
           </div>
         </div>
 
@@ -121,6 +141,17 @@
               <div id="pumpButton" class="toggle-btn" data-device="pump"></div>
             </div>
             <div class="text2">OFF</div>
+            <br><br>
+            <div class="text3">OFF</div>
+          </div>
+          <div class="text3">Speed Control</div>
+          <div class="slider-container">
+            <div class="slider">
+              <div id="slider-value-left">0</div>
+              <input type = "range" min="0" max="255" id="Slide2">
+              <div id="slider-value-right">255</div>
+            </div>
+            <div id="slider-value-pump" class="slider-value">0</div>
           </div>
         </div>
 
@@ -131,10 +162,19 @@
             <div class="toggle3">
               <div id="heaterButton" class="toggle-btn" data-device="heater"></div>
             </div>
+            <br><br>
             <div class="text3">OFF</div>
           </div>
+          <div class="text3">Speed Control</div>
+          <div class="slider-container">
+            <div class="slider">
+              <div id="slider-value-left">0</div>
+              <input type="range" min="0" max="255" id="Slide3">
+              <div id="slider-value-right">255</div>
+            </div>
+            <div id="slider-value-heater" class="slider-value">0</div>
+          </div>
         </div>
-
       </div>
 
     </section>
