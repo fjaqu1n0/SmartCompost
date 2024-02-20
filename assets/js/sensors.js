@@ -1,15 +1,12 @@
 //JS file for Sensors
 
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("LOADED");
-  
     // Configuration variables
-    var updateInterval = 10000; // 5s in ms
+    var updateInterval = 10000; //5 mins //10s
     var numberElements = 30;
     var updateCount = 0;
-
-    let mutex = false; // Shared mutex variable
     
+  // Chart Objects
+
    // Chart instances & configuration
    var Humidity = new Chart(document.querySelector('#Humidity'), {
     type: 'line',
@@ -62,16 +59,14 @@ document.addEventListener("DOMContentLoaded", function () {
         data: [],
         fill: false,
         borderColor: "#990000",
-        borderWidth: 1,
-        lineTension: 0.5,
+        lineTension: 0.1,
       },
       {
         label: "Sensor 2",
         data: [],
         fill: false,
         borderColor: "rgb(0,128,0)",
-        borderWidth: 1,
-        lineTension: 0.5,
+        lineTension: 0.1,
           },
         ],
     },
@@ -92,17 +87,15 @@ document.addEventListener("DOMContentLoaded", function () {
         label: "Sensor 1",
         data: [],
         fill: false,
-        borderColor: "#990000",
-        borderWidth: 1,
-        lineTension: 0.5,
+        borderColor: "#3cb371",
+        tension: 0.1
       },
       {
         label: "Sensor 2",
         data: [],
         fill: false,
-        borderColor: "#706f6f",
-        borderWidth: 1,
-        lineTension: 0.5,
+        borderColor: "#5f6062",
+        tension: 0.1
           },
         ],
     },
@@ -124,17 +117,15 @@ document.addEventListener("DOMContentLoaded", function () {
         label: "Sensor 1",
         data: [],
         fill: false,
-        borderColor: "#990000",
-        borderWidth: 1,
-        lineTension: 0.5,
+        borderColor: "#363031",
+        tension: 0.1
       },
       {
         label: "Sensor 2",
         data: [],
         fill: false,
-        borderColor: "#706f6f",
-        borderWidth: 1,
-        lineTension: 0.5,
+        borderColor: "rgb(75, 192, 192)",
+        tension: 0.1
           },
         ],
     },
@@ -175,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Update stored data in sessionStorage
-        sessionStorage.setItem(chartInstance.canvas.id, JSON.stringify(chartInstance.data));
+        localStorage.setItem(chartInstance.canvas.id, JSON.stringify(chartInstance.data));
 
         // Update the chart
         chartInstance.update();
@@ -187,105 +178,125 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function addDataDHT(data, chartInstance) {
   if (data && chartInstance) {
-      const currentTime = new Date();
-      const formattedTime =
-          currentTime.getHours() +
-          ":" +
-          currentTime.getMinutes() +
-          ":" +
-          currentTime.getSeconds();
+    const currentTime = new Date();
+    const formattedTime = currentTime.getHours() + ":" + currentTime.getMinutes() + ":" + currentTime.getSeconds();
 
-      chartInstance.data.labels.push(formattedTime);
+    // Push data to chart labels and datasets
+    chartInstance.data.labels.push(formattedTime);
+    chartInstance.data.datasets[0].data.push(data);
 
-      // DHT data has only one dataset
-      chartInstance.data.datasets[0].data.push(data);
+    // Limit the number of data points to 'numberElements'
+    if (chartInstance.data.labels.length > numberElements) {
+      chartInstance.data.labels.shift(); // Remove the oldest label
+      chartInstance.data.datasets.forEach((dataset) => {
+        dataset.data.shift(); // Remove the oldest data point for each dataset
+      });
+    }
 
-      // Limit the number of data points to 'numberElements'
-      if (chartInstance.data.labels.length > numberElements) {
-          chartInstance.data.labels.shift(); // Remove the oldest label
-          chartInstance.data.datasets.forEach((dataset) => {
-              dataset.data.shift(); // Remove the oldest data point for each dataset
-          });
-      }
-       // Update stored data in sessionStorage
-       sessionStorage.setItem(chartInstance.canvas.id, JSON.stringify(chartInstance.data));
+    // Update stored data in sessionStorage
+    localStorage.setItem(chartInstance.canvas.id, JSON.stringify(chartInstance.data));
 
-      // Update stored data in sessionStorage
-      chartInstance.update();
+    // Update the chart
+    chartInstance.update();
 
-      updateCount++; // Increment the updateCount
+    updateCount++; // Increment the updateCount
   }
 }
 
+let lastDataFetchTimestamp = 0;
+let throttlingInterval = 10000; // 10 seconds
+
+// Update the updateDataSensors function
 function updateDataSensors() {
-  if (mutex) return; // Check if mutex is locked
+  const lastFetchTimestamp = parseInt(localStorage.getItem('lastDataFetchTimestampSensor') || '0', 10);
+  const currentTime = Date.now();
 
-  mutex = true; // Acquire mutex lock
+  if (currentTime - lastFetchTimestamp >= 10000) {
+    localStorage.setItem('lastDataFetchTimestampSensor', currentTime.toString());
 
-  // Use AJAX to fetch data for Sensor 1 and 2 from PHP script
-  $.ajax({
-    url: "php/dataGenerator.php", // URL to PHP script
-    dataType: "json",
-    success: function (data) {
-      // Handle the data received from the PHP script for Sensor 1 and 2
-      addData(data['soilTemperature'], Temp, 0);
-      addData(data['soilTemperature2'], Temp, 1);
-      addData(data['soilMoisture'], Moist, 0);
-      addData(data['soilMoisture2'], Moist, 1);
-      addData(data['soilpH'], phLevel, 0);
-      addData(data['soilpH2'], phLevel, 1);
+    // Use XHR to fetch data for Sensor 1 and 2 from PHP script
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'php/dataGenerator.php', true);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          var data = JSON.parse(xhr.responseText);
+          if (data.isActive) { // Check if isActive is true
+            addData(data['soilTemperature'], Temp, 0);
+            addData(data['soilMoisture'], Moist, 0);
+            addData(data['soilpH'], phLevel, 0);
+            // Continue to fetch data periodically
+            setTimeout(updateDataSensors, updateInterval);
+          } else {
+            console.log('The Python script is not active. No updates will be made to the chart.');
+          }
+        } else {
+          // Handle any errors if the request fails
+          console.error("Error fetching data from the server. Status code: " + xhr.status);
+        }
+      }
+    };
 
-      // Release mutex lock
-      mutex = false;
-
-      // Continue to fetch data for Sensor 1 and 2 periodically
-      setTimeout(updateDataSensors, updateInterval);
-    },
-    error: function () {
+    xhr.onerror = function () {
       // Handle any errors if the request fails
       console.error("Error fetching data from the server.");
+    };
 
-      // Release mutex lock
-      mutex = false;
-    },
-  });
-}
-  updateDataSensors();
-  
-  function updateDHT() {
-    if (mutex) return; // Check if mutex is locked
-  
-    mutex = true; // Acquire mutex lock
-  
-    // Use AJAX to fetch data for DHT from PHP script
-    $.ajax({
-      url: "php/dataGenerator.php", // URL to PHP script
-      dataType: "json",
-      success: function (data) {
-        // Handle the data received from the PHP script for DHT
-        addDataDHT(data['airHumidity'], Humidity);
-        addDataDHT(data['airTemperature'], AirTemperature);
-  
-        // Release mutex lock
-        mutex = false;
-  
-        // Continue to fetch data for DHT periodically
-        setTimeout(updateDHT, updateInterval);
-      },
-      error: function () {
-        // Handle any errors if the request fails
-        console.error("Error fetching data for DHT from the server.");
-  
-        // Release mutex lock
-        mutex = false;
-      },
-    });
+    xhr.send();
+  } else {
+    setTimeout(updateDataSensors, 10000 - (currentTime - lastFetchTimestamp));
   }
-  updateDHT();
+}
+
+// Update the updateDHT function
+function updateDHT() {
+  const lastFetchTimestamp = parseInt(localStorage.getItem('lastDataFetchTimestampDHT') || '0', 10);
+  const currentTime = Date.now();
+
+  if (currentTime - lastFetchTimestamp >= 10000) {
+    localStorage.setItem('lastDataFetchTimestampDHT', currentTime.toString());
+
+    // Use XHR to fetch data for DHT from PHP script
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'php/dataGenerator.php', true);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          var data = JSON.parse(xhr.responseText);
+          if (data.isActive) { // Check if isActive is true
+            addDataDHT(data['airHumidity'], Humidity);
+            addDataDHT(data['airTemperature'], AirTemperature);
+            // Continue to fetch data periodically
+            setTimeout(updateDHT, updateInterval);
+          } else {
+            console.log('The Python script is not active. No updates will be made to the chart.');
+          }
+        } else {
+          // Handle any errors if the request fails
+          console.error("Error fetching data from the server. Status code: " + xhr.status);
+        }
+      }
+    };
+
+    xhr.onerror = function () {
+      // Handle any errors if the request fails
+      console.error("Error fetching data from the server.");
+    };
+
+    xhr.send();
+  } else {
+    setTimeout(updateDHT, 10000 - (currentTime - lastFetchTimestamp));
+  }
+}
+
 
   function restoreChartState(chartInstance) {
     // Retrieve stored data from sessionStorage
-    const storedData = sessionStorage.getItem(chartInstance.canvas.id);
+    const storedData =  localStorage.getItem(chartInstance.canvas.id);
 
     if (storedData) {
         const parsedData = JSON.parse(storedData);
@@ -294,37 +305,35 @@ function updateDataSensors() {
     }
 }
 
-   // Restore chart states on page load
-   restoreChartState(Temp);
-   restoreChartState(Moist);
-   restoreChartState(phLevel);
-   restoreChartState(Humidity);
-   restoreChartState(AirTemperature);
-
-// Event listener for the "Reset" button
-document.getElementById("resetButton").addEventListener("click", function () {
-  clearAllCharts(); // Call the function to clear all charts
-});
-
 function clearAllCharts() {
   // Clear the data for all charts
   Temp.data.labels = [];
-  Temp.data.datasets.forEach(dataset => dataset.data = []);
+  Temp.data.datasets.forEach(function (dataset) {
+    dataset.data = [];
+  });
 
   Moist.data.labels = [];
-  Moist.data.datasets.forEach(dataset => dataset.data = []);
+  Moist.data.datasets.forEach(function (dataset) {
+    dataset.data = [];
+  });
 
   phLevel.data.labels = [];
-  phLevel.data.datasets.forEach(dataset => dataset.data = []);
+  phLevel.data.datasets.forEach(function (dataset) {
+    dataset.data = [];
+  });
 
   Humidity.data.labels = [];
-  Humidity.data.datasets.forEach(dataset => dataset.data = []);
+  Humidity.data.datasets.forEach(function (dataset) {
+    dataset.data = [];
+  });
 
   AirTemperature.data.labels = [];
-  AirTemperature.data.datasets.forEach(dataset => dataset.data = []);
+  AirTemperature.data.datasets.forEach(function (dataset) {
+    dataset.data = [];
+  });
 
   // Clear stored data in sessionStorage
-  sessionStorage.clear();
+  localStorage.clear();
 
   // Reset the timestamp counter
   updateCount = 0;
@@ -335,16 +344,24 @@ function clearAllCharts() {
   phLevel.update();
   Humidity.update();
   AirTemperature.update();
-
-  // Calculate the time remaining until the next interval
-  const remainingTime = updateInterval - (Date.now() % updateInterval);
-
-  // Fetch new data with the next timestamp after the full interval has elapsed
-  setTimeout(() => {
-    updateDataSensors();
-    updateDHT();
-  }, remainingTime);
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("LOADED");
 
+   // Restore chart states on page load
+   restoreChartState(Temp);
+   restoreChartState(Moist);
+   restoreChartState(phLevel);
+   restoreChartState(Humidity);
+   restoreChartState(AirTemperature);
+
+   updateDataSensors();
+   updateDHT();
+
+  // Event listener for the "Reset" button
+  document.getElementById("resetButton").addEventListener("click", function () {
+    clearAllCharts(); // Call the function to clear all charts
   });
+
+});
