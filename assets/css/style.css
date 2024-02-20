@@ -666,23 +666,60 @@ h6 {
 }
 
 /*Button styles*/
-button {
-  display: inline-block;
+/* Button container */
+.button-container {
+  display: flex; /* Use flexbox for layout */
+}
+
+/* Button styling */
+button, .dropdown-toggle {
   background-color: #012970;
-  padding: 1px;
-  width: 70px;
   color: #ffffff;
-  border: 2px double #cccccc; 
-  border-radius: 5px; 
-  font-size: 15px; 
-  cursor: pointer; 
-  margin: 0;
-  -webkit-transition: all 0.5s; /* add this line, chrome, safari, etc */
+  border: 2px double #cccccc;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 5px 10px;
   transition: all 0.5s;
 }
-button:hover {
+
+button:hover, .dropdown-toggle:hover {
   background-color: rgb(17, 30, 80);
 }
+
+/* Add margin between Export and Delete buttons */
+#deleteButton {
+  margin-left: 5px; /* Adjust the margin as needed */
+}
+
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #cccccc;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #000000;
+  transition: background-color 0.3s;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f2f2f2;
+}
+
+/*--------------------------------------------------------------
+# End Footer
+--------------------------------------------------------------*/
 
 /*Toggle Button styles*/
 .container {
@@ -867,4 +904,104 @@ button:hover {
   left: 40%;
   height: 30px;
 
+}
+
+/*--------------------------------------------------------------
+# Slider Styles
+--------------------------------------------------------------*/
+.slider-container {
+  background-color: white;
+  display: flex; 
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  padding: 10px 0;
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* This spreads out the children */
+  width: 80%; /* Adjust the width as necessary */
+  position: relative; 
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  flex-grow: 1; 
+  height: 5px; 
+  background-color: #012970;;
+  border-radius: 10px;
+  outline: none;
+  margin: 0 10px; 
+}
+
+.slider-value-left, .slider-value-right, .slider-value {
+  color: #666;
+  position: absolute; /* Absolute position relative to the slider */
+  top: 30px; /* Adjust the distance from the top of the slider */
+}
+
+.slider-value-left {
+  left: 0;
+}
+
+.slider-value-right {
+  right: 0;
+}
+
+.slider-value {
+  position: static;
+  margin-top: 1px;
+  margin-left: -5%; 
+  text-align: center; 
+  width: 50px; 
+  color: white; 
+  font-size: 1em; 
+  background-color: #012970;
+}
+
+input[type="range"]::-webkit-slider-runnable-track{
+  -webkit-appearance: none;
+}
+
+
+input[type="range"]::-ms-track{
+  appearance: none;
+}
+
+input[type="range"]::-moz-track{
+  -moz-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  background-color: #3d59ab;
+  height: 20px;
+  width: 20px;
+cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type="range"]::-moz-range-thumb{
+  -webkit-appearance: none;
+  background-color: #3d59ab;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type="range"]::-ms-thumb{
+  appearance: none;
+  background-color: #3d59ab;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type="range"]:active::-webkit-slider-thumb{
+  background-color: white;
+  border: 3px solid #3d59ab;
 }
