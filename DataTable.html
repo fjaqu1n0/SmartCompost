@@ -18,14 +18,24 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"  rel="stylesheet"/>
+  <link  href="https://cdn.datatables.net/2.0.0/css/dataTables.bootstrap5.css" rel="stylesheet" />
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  
+  <!-- Data Table JS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.datatables.net/2.0.0/js/dataTables.js"></script>
+  <script src="https://cdn.datatables.net/2.0.0/js/dataTables.bootstrap5.js"></script>
 
+    <!-- Template Main JS File -->
+    <script defer src="assets/js/main.js"></script>
+    <script defer src="assets/js/tables.js"></script>
+  
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Updated: Nov 17 2023 with Bootstrap v5.3.2
@@ -95,30 +105,24 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Sensor Data</h5>
-              
-             
 
               <!-- Table with stripped rows -->
-              
-              <table class="table datatable" id="sensorData">
+              <table id="sensorData" class="table table-striped" style="width:100%">
                 <thead>
-                  <tr>
-                    <th>
-                      <b>T</b>imestamp
-                    </th>
-                    <th>Humidity</th>
-                    <th>Air Temperature</th>
-                    <th>Soil Temperature</th>
-                    <th>Soil Moisture</th>
-                    <th>Soil pH</th>
-                  </tr>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Humidity</th>
+                        <th>Air Temperature</th>
+                        <th>Soil Temperature</th>
+                        <th>Soil Moisture</th>
+                        <th>pH</th>
+                    </tr>
                 </thead>
                 <tbody>
-                 
                 </tbody>
-              </table>
+            </table>
               <!-- End Table with stripped rows -->
-            
+
             </div>
           </div>
 
@@ -136,7 +140,7 @@
           <li><a href="#" id ="exportTXT">TXT</a></li>
         </ul>
       </div>
-      <button id="deleteButton">Delete</button>
+      <button id="deleteButton">Clear</button>
     </div>
 
   </main><!-- End #main -->
@@ -156,15 +160,6 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/tables.js"></script>
-  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
