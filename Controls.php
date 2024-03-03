@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        header('Location: index.html');
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,15 +47,13 @@
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/mmcm.png" alt="">
-        <span class="d-none d-lg-block">SmartCompost</span>
-      </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
-
-    </nav><!-- End Icons Navigation -->
+    <div class="d-flex align-items-center justify-content-between">  
+        <a href="Home.php" class="logo d-flex align-items-center">
+          <img src="assets/img/mmcm.png" alt="">
+          <span class="d-none d-lg-block">SmartCompost</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>        
+    </div>
 
   </header><!-- End Header -->
 
@@ -56,26 +62,33 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class='bx bx-line-chart'></i>
-          <span>Home</span>
-        </a>
-      </li><!-- End Home Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="Home.php">
+                <i class='bx bx-line-chart'></i>
+                <span>Home</span>
+            </a>
+        </li><!-- End Home Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="Controls.html">
-            <i class='bx bxs-cog' ></i>
-          <span>Controls</span>
-        </a>
-      </li><!-- End Controls Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="Controls.php">
+                <i class='bx bxs-cog'></i>
+                <span>Controls</span>
+            </a>
+        </li><!-- End Controls Page Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="DataTable.html">
-          <i class='bx bx-table'></i>
-          <span>Data Table</span>
-        </a>
-      </li><!-- End Data Logs Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="DataTable.php">
+                <i class='bx bx-table'></i>
+                <span>Data Table</span>
+            </a>
+        </li><!-- End Data Logs Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="php/logout.php"> <!-- Changed href to logout.php -->
+                <i class='bx bx-log-out'></i>
+                <span>Logout</span>
+            </a>
+        </li><!-- End Data Logs Page Nav -->
 
     </ul>
 

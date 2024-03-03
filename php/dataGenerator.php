@@ -1,8 +1,8 @@
 <?php
 // Connect to the MySQL database
-$servername = "192.168.1.128";
-$username = "admin";
-$password = "Capstone23";
+$servername = "localhost";
+$username = "root";
+$password = '';
 $dbname = "testdb";
 
 $conn = new mysqli($servername, $username, $password, $dbname);

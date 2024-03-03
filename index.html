@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Home - SmartCompost</title>
+  <title>Login</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -21,171 +21,144 @@
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Nov 17 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <script>
+    // Function to check for error message in URL and display it
+    function displayErrorMessage() {
+        // Get the error message from the URL parameter
+        var urlParams = new URLSearchParams(window.location.search);
+        var error = urlParams.get('error');
+        // If error message exists, display it in an alert
+        if (error) {
+            alert(error);
+        }
+    }
+    // Call the function when the page loads
+    window.onload = function() {
+        displayErrorMessage();
+    };
+</script>
 </head>
 
-<body>
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
-
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+  <div class="d-flex align-items-center justify-content-between">
+      <a class="logo d-flex align-items-center">
         <img src="assets/img/mmcm.png" alt="">
         <span class="d-none d-lg-block">SmartCompost</span>
       </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
-
-    </nav><!-- End Icons Navigation -->
-
-  </header><!-- End Header -->
-
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class='bx bx-line-chart'></i>
-          <span>Home</span>
-        </a>
-      </li><!-- End Home Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="Controls.html">
-            <i class='bx bxs-cog' ></i>
-          <span>Controls</span>
-        </a>
-      </li><!-- End Controls Page Nav -->
-      
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="DataTable.html">
-          <i class='bx bx-table'></i>
-          <span>Data Table</span>
-        </a>
-      </li><!-- End Data Logs Page Nav -->
-
-    </ul>
-
-  </aside><!-- End Sidebar-->
-
-  <main id="main" class="main">
-
-    <div class="pagetitle">
-      <h1>Sensor Data</h1>
-      <button id="resetButton">Clear</button>
-
-    </div><!-- End Page Title -->
+    </a>          
+  </div>
 
 
-    <section class="section">
-      <div class="row">
+</header><!-- End Header -->
 
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Air Humidity</h5>
+<body>
 
-              <!-- Line Chart (Humidity)-->
-              <canvas id="Humidity" style="max-height: 400px;"></canvas>
-              <!-- End Line Chart -->
+  <main>
+    <div class="container">
 
-            </div>
-          </div>
-        </div>
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Air Temperature</h5>
+              <div class="card mb-3">
 
-              <!-- Line Chart (Humidity)-->
-              <canvas id="AirTemp" style="max-height: 400px;"></canvas>
+                <div class="card-body">
 
-              <!-- End Line CHart -->
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
+                    <p class="text-center small">Enter your username & password to login</p>
+                  </div>
+
+                  <div id="frm">
+                    <form name="f1" action="php/authentication.php" onsubmit = "return validation()" method = "POST" class="row g-3">
+
+                      <div class="col-12">
+                        <label for="yourUsername" class="form-label">Username</label>
+                        <div class="input-group has-validation">
+                          <input type="text" name="user" class="form-control" id="user" required>
+                          <div class="invalid-feedback">Please enter your username.</div>
+                        </div>
+                      </div>
+  
+                      <div class="col-12">
+                        <label for="yourPassword" class="form-label">Password</label>
+                        <input type="password" name="pass" class="form-control" id="pass" required>
+                        <div class="invalid-feedback">Please enter your password!</div>
+                      </div>
+                      <div class="col-12">
+                        <input type = "submit" id="btn" value="Login" class="btn btn-primary w-100" type="submit"></input>
+                      </div>
+                    </form>
+
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+              </div>
 
             </div>
           </div>
         </div>
 
-         <!-- Line Chart (Temperature)-->
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Soil Temperature</h5>
+      </section>
 
-             
-              <canvas id="SoilTemperature" style="max-height: 400px;"></canvas>
-            </div>
-          </div>
-        </div>
-
-        <!-- Line Chart (Moisture)-->
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Soil Moisture</h5>
-               <canvas id="SoilMoisture" style="max-height: 400px;"></canvas>
-            </div>
-          </div>
-        </div>
-
-         <!-- Line Chart (pH)-->
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Soil pH</h5>
-               <canvas id="SoilpH" style="max-height: 400px;"></canvas>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
+    </div>
   </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <strong><span>Francis Jacob Aquino</span></strong> using  <a href="https://bootstrapmade.com/">BootstrapMade</a>
-    </div>
-  </footer><!-- End Footer -->
+  <script>  
+    function validation()  
+    {  
+        var id=document.f1.user.value;  
+        var ps=document.f1.pass.value;  
+        if(id.length=="" && ps.length=="") {  
+            alert("User Name and Password fields are empty");  
+            return false;  
+        }  
+        else  
+        {  
+            if(id.length=="") {  
+                alert("User Name is empty");  
+                return false;  
+            }   
+            if (ps.length=="") {  
+            alert("Password field is empty");  
+            return false;  
+            }  
+        }                             
+    }  
+</script> 
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
 
-  
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/sensors.js"></script>
 
-  
 </body>
 
 </html>
