@@ -153,6 +153,18 @@
           <li><a href="#" id ="exportTXT">TXT</a></li>
         </ul>
       </div>
+         <div class="dropdown1">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" aria-haspopup="true" aria-expanded="false">
+          Hide Column
+        </button>
+        <ul class="dropdown-menu1" aria-labelledby="dropdownMenuButton1">
+          <li><a href="#" id="Humidity">Humidity</a></li>
+          <li><a href="#" id="AirTemp">Air Temperature</a></li>
+          <li><a href="#" id ="SoilTemp">Soil Moisture</a></li>
+          <li><a href="#" id ="Moist">Soil Moisture</a></li>
+          <li><a href="#" id ="pH">Soil pH</a></li>
+        </ul>
+      </div>
       <button id="deleteButton">Clear</button>
     </div>
 
