@@ -1,6 +1,9 @@
 $(document).ready(function() {
   var lastId = localStorage.getItem('lastId') ? parseInt(localStorage.getItem('lastId'), 10) : 0;
   var table = $('#sensorData').DataTable({
+     "columnDefs": [
+        { "targets": [2, 3, 4, 5], "visible": true, "searchable": true }
+    ],
       "ajax": {
           "url": "php/tableGenerator.php",
           "type": "POST",
@@ -31,6 +34,8 @@ $(document).ready(function() {
           }
       });
   });
+  
+ //---ONCLICK LISTENERS --------------------------------//
 
   setInterval(function() {
       table.ajax.reload(); // Reload the table data regularly
@@ -41,12 +46,24 @@ $(document).ready(function() {
         $('.dropdown-menu').toggle(); // Toggles the visibility of the dropdown menu
     });
 
+  $('#dropdownMenuButton1').on('click', function (event) {
+        $('.dropdown-menu1').toggle(); // Toggles the visibility of the dropdown menu
+    });
+
     // Close the dropdown menu if clicked outside
     $(document).on('click', function (e) {
         if (!$(e.target).closest('.dropdown').length) {
             $('.dropdown-menu').hide(); // Hide the dropdown menu
         }
     });
+  
+    $(document).on('click', function (e) {
+        if (!$(e.target).closest('.dropdown1').length) {
+            $('.dropdown-menu1').hide(); // Hide the dropdown menu
+        }
+    });
+
+  //-------------EVENT HANDLERs --------------------------------//
 
     // Export option listeners
     $('#exportCsv, #exportSQL, #exportTXT').on('click', function() {
@@ -61,7 +78,44 @@ $(document).ready(function() {
         exportTableData(exportType); // Call the export function with the determined type
     });
 
-    function exportTableData(exportType) {
+     // Event handler for hiding the Humidity column
+        $('#Humidity').on('click', function(e) {
+            e.preventDefault();
+            // Toggle the visibility of the Humidity column (index 1)
+            var column = table.column(1);
+            column.visible(!column.visible());
+        });
+
+      $('#AirTemp').on('click', function(e) {
+        e.preventDefault();
+        var column = table.column(2); // Adjust the index for Air Temperature
+        column.visible(!column.visible());
+    });
+
+    $('#SoilTemp').on('click', function(e) {
+        e.preventDefault();
+        var column = table.column(3); // Adjust the index for Soil Temperature
+        column.visible(!column.visible());
+    });
+
+    $('#Moist').on('click', function(e) {
+        e.preventDefault();
+        var column = table.column(4); // Adjust the index for Soil Moisture
+        column.visible(!column.visible());
+    });
+
+    $('#pH').on('click', function(e) {
+        e.preventDefault();
+        var column = table.column(5); // Adjust the index for pH
+        column.visible(!column.visible());
+    });
+
+  //---  FUNCTIONS --------------------------------
+    // Function to check if the table is empty
+    function isTableEmpty() {
+        return $('#sensorData').DataTable().data().count() === 0;
+    }
+ function exportTableData(exportType) {
         var dataToExport = '';
     
         if (exportType === 'CSV') {
@@ -77,7 +131,6 @@ $(document).ready(function() {
             alert('Export for ' + exportType + ' format not implemented.');
         }
     }
-    
     function exportToCSV() {
         var csv = '';
         var table = $('#sensorData').DataTable();
