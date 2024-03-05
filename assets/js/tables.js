@@ -30,17 +30,22 @@ $(document).ready(function() {
           success: function(data) {
               lastId = parseInt(data.highestId, 10);
               localStorage.setItem('lastId', lastId); // Update the local storage with the new lastId
-              table.clear().draw(); // Clear the DataTable
+              table.ajax.reload(null, false);
+            //table.clear().draw(); // Clear the DataTable
           }
       });
   });
   
- //---ONCLICK LISTENERS --------------------------------//
+
 
   setInterval(function() {
-      table.ajax.reload(); // Reload the table data regularly
+    var currentPage = table.page();
+    table.ajax.reload(function() {
+        table.page(currentPage).draw(false); // Move back to the current page after reload
+    }, false); // Reload the table data regularly
   }, 10000); // 10 seconds refresh rate
 
+   //---ONCLICK LISTENERS --------------------------------//
    // Dropdown toggle
     $('#dropdownMenuButton').on('click', function (event) {
         $('.dropdown-menu').toggle(); // Toggles the visibility of the dropdown menu
