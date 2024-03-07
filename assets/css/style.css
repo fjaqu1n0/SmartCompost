@@ -1231,12 +1231,31 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
-
-/*Button styles*/
+/*--------------------------------------------------------------
+# End Footer
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# Button Styles
+--------------------------------------------------------------*
 /* Button container */
 .button-container {
-  display: flex; /* Use flexbox for layout */
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Ensure the container spans the full width */
 }
+
+.left-buttons {
+  display: flex;
+  gap: 10px; /* Adjust space between buttons */
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px; /* Optional: Adjusts space between the header and the table */
+}
+
 
 /* Button styling */
 button, .dropdown-toggle {
@@ -1254,12 +1273,21 @@ button:hover, .dropdown-toggle:hover {
   background-color: rgb(17, 30, 80);
 }
 
-/* Add margin between Export and Delete buttons */
 #deleteButton {
-  margin-left: 5px; /* Adjust the margin as needed */
+  padding: 5px 10px;
+  background-color: #012970;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
+/*--------------------------------------------------------------
+# End Button Styling
+--------------------------------------------------------------*/
 
 
+/*--------------------------------------------------------------
+# Drop Down Menu Styling
+--------------------------------------------------------------*/
 /* Dropdown menu styling */
 .dropdown-menu {
   display: none;
@@ -1307,10 +1335,13 @@ button:hover, .dropdown-toggle:hover {
   background-color: #f2f2f2;
 }
 /*--------------------------------------------------------------
-# End Footer
+# End Dropdown Menu styling
 --------------------------------------------------------------*/
 
-/*Toggle Button styles*/
+
+/*--------------------------------------------------------------
+# Toggle Button Styles
+--------------------------------------------------------------*/
 .iconslist .container {
   position: relative;
   left: 10%;
@@ -1593,4 +1624,12 @@ input[type="range"]::-ms-thumb{
 input[type="range"]:active::-webkit-slider-thumb{
   background-color: white;
   border: 3px solid #3d59ab;
+}
+
+/*--------------------------------------------------------------
+# Table Styles
+--------------------------------------------------------------*/
+/* Hover effect for rows initially white */
+table.dataTable tbody tr:nth-child(even):hover {
+  background-color: #f2f2f2; /* Gray color on hover */
 }
