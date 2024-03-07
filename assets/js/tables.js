@@ -1,25 +1,34 @@
 $(document).ready(function() {
+  var firstClickedIndex = null;
+  var lastClickedIndex = null;
   var lastId = localStorage.getItem('lastId') ? parseInt(localStorage.getItem('lastId'), 10) : 0;
   var table = $('#sensorData').DataTable({
      "columnDefs": [
         { "targets": [2, 3, 4, 5], "visible": true, "searchable": true }
     ],
-      "ajax": {
-          "url": "php/tableGenerator.php",
-          "type": "POST",
-          "data": {
-              "lastId": lastId
-          },
-          "dataSrc": ""
-      },
+     "ajax": {
+        "url": "php/tableGenerator.php",
+        "type": "POST",
+        "data": {
+            "lastId": lastId
+        },
+        "dataSrc": function(json) {
+            var deletedIds = JSON.parse(localStorage.getItem('deletedRowIds') || '[]');
+            return json.filter(function(row) {
+                return deletedIds.indexOf(row.id) === -1;
+            });
+        }
+    },
       "columns": [
+          { "data": "id", "visible": false },
           { "data": "timestamp" },
           { "data": "air_humidity" },
           { "data": "air_temperature" },
           { "data": "soil_temperature" },
           { "data": "soil_moisture_3in1" },
           { "data": "soil_pH" }
-      ]
+      ],
+      rowReorder: true,
   });
 
   setInterval(function() {
@@ -63,19 +72,32 @@ $(document).on('click', function(e) {
     }
 });
 
-  $('#deleteButton').on('click', function() {
-      $.ajax({
-          url: 'php/tableGenerator.php',
-          type: 'GET',
-          data: { action: 'fetchHighestId' },
-          success: function(data) {
-              lastId = parseInt(data.highestId, 10);
-              localStorage.setItem('lastId', lastId); // Update the local storage with the new lastId
-              table.ajax.reload(null, false);
-            //table.clear().draw(); // Clear the DataTable
-          }
-      });
-  });
+// Function to delete selected rows
+$('#deleteButton').on('click', function() {
+    var deletedRowIds = [];
+    var selectedRows = table.rows('.selected').data();
+    var numberOfRowsToDelete = selectedRows.length;
+
+    if (numberOfRowsToDelete === 0) {
+        alert('No rows selected to delete.');
+        return;
+    }
+
+    var confirmDelete = confirm(`Are you sure you want to delete ${numberOfRowsToDelete} row(s)?`);
+    if (!confirmDelete) {
+        return; // User cancelled the deletion
+    }
+
+    var deletedRowIds = JSON.parse(localStorage.getItem('deletedRowIds') || '[]'); // Retrieve existing deleted IDs
+
+    $.each(selectedRows, function(index, row) {
+        deletedRowIds.push(row.id); // Assuming 'id' is part of your row data
+    });
+
+    localStorage.setItem('deletedRowIds', JSON.stringify(deletedRowIds)); // Store updated IDs
+
+    table.rows('.selected').remove().draw(false); // Remove rows visually from DataTable
+});
   
    // Dropdown toggle
     $('#dropdownMenuButton').on('click', function (event) {
