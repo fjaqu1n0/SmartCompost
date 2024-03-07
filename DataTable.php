@@ -125,6 +125,7 @@
               <table id="sensorData" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Timestamp</th>
                         <th>Humidity</th>
                         <th>Air Temperature</th>
