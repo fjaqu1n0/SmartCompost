@@ -117,8 +117,10 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Sensor Data</h5>
-
+              <div class="table-header">
+                <h5 class="card-title">Sensor Data</h5>
+                <button id="deleteButton">Delete</button>
+            </div>
               <!-- Table with stripped rows -->
               <table id="sensorData" class="table table-striped" style="width:100%">
                 <thead>
@@ -142,31 +144,33 @@
         </div>
       </div>
     </section>
-    <div class="button-container">
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
-          Export
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li><a href="#" id="exportCsv">CSV</a></li>
-          <li><a href="#" id="exportSQL">SQL</a></li>
-          <li><a href="#" id ="exportTXT">TXT</a></li>
-        </ul>
+      <div class="button-container">
+      <div class="left-buttons">
+        <button id="EditButton">Edit</button>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+            Export
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a href="#" id="exportCsv">CSV</a></li>
+            <li><a href="#" id="exportSQL">SQL</a></li>
+            <li><a href="#" id ="exportTXT">TXT</a></li>
+          </ul>
+        </div>
+        <div class="dropdown1">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" aria-haspopup="true" aria-expanded="false">
+            Hide Column
+          </button>
+          <ul class="dropdown-menu1" aria-labelledby="dropdownMenuButton1">
+            <li><a href="#" id="Humidity">Humidity</a></li>
+            <li><a href="#" id="AirTemp">Air Temperature</a></li>
+            <li><a href="#" id ="SoilTemp">Soil Moisture</a></li>
+            <li><a href="#" id ="Moist">Soil Moisture</a></li>
+            <li><a href="#" id ="pH">Soil pH</a></li>
+          </ul>
+        </div>
       </div>
-         <div class="dropdown1">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" aria-haspopup="true" aria-expanded="false">
-          Hide Column
-        </button>
-        <ul class="dropdown-menu1" aria-labelledby="dropdownMenuButton1">
-          <li><a href="#" id="Humidity">Humidity</a></li>
-          <li><a href="#" id="AirTemp">Air Temperature</a></li>
-          <li><a href="#" id ="SoilTemp">Soil Moisture</a></li>
-          <li><a href="#" id ="Moist">Soil Moisture</a></li>
-          <li><a href="#" id ="pH">Soil pH</a></li>
-        </ul>
       </div>
-      <button id="deleteButton">Clear</button>
-    </div>
 
   </main><!-- End #main -->
 
