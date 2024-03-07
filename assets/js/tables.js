@@ -22,6 +22,47 @@ $(document).ready(function() {
       ]
   });
 
+  setInterval(function() {
+    var currentPage = table.page();
+    table.ajax.reload(function() {
+        table.page(currentPage).draw(false); // Move back to the current page after reload
+    }, false); // Reload the table data regularly
+  }, 10000); // 10 seconds refresh rate
+
+   //---ONCLICK LISTENERS --------------------------------//
+
+  //Click event for table rows
+  $('#sensorData tbody').on('click', 'tr', function(e) {
+    var index = $(this).index();
+    var isCtrlPressed = e.ctrlKey || e.metaKey;
+    var isShiftPressed = e.shiftKey;
+
+    if (!isCtrlPressed && !isShiftPressed) {
+        $('#sensorData tbody tr.selected').not(this).removeClass('selected');
+        $(this).toggleClass('selected');
+        firstClickedIndex = index; // Set or reset the first index
+    } else if (isShiftPressed) {
+        if(firstClickedIndex !== null) {
+            $('#sensorData tbody tr').removeClass('selected'); // Reset selection
+            var start = Math.min(firstClickedIndex, index);
+            var end = Math.max(firstClickedIndex, index);
+            $('#sensorData tbody tr').slice(start, end + 1).addClass('selected');
+            lastClickedIndex = index; // Keep track of the last clicked index for shift selection
+        }
+    } else if (isCtrlPressed) {
+        $(this).toggleClass('selected');
+        firstClickedIndex = null; // Reset firstClickedIndex on Ctrl+click
+    }
+});
+
+// Deselect all rows when clicking outside the table
+$(document).on('click', function(e) {
+    if (!$(e.target).closest('#sensorData').length) {
+        $('#sensorData tbody tr.selected').removeClass('selected');
+        firstClickedIndex = null; // Also reset on clicking outside
+    }
+});
+
   $('#deleteButton').on('click', function() {
       $.ajax({
           url: 'php/tableGenerator.php',
@@ -36,16 +77,6 @@ $(document).ready(function() {
       });
   });
   
-
-
-  setInterval(function() {
-    var currentPage = table.page();
-    table.ajax.reload(function() {
-        table.page(currentPage).draw(false); // Move back to the current page after reload
-    }, false); // Reload the table data regularly
-  }, 10000); // 10 seconds refresh rate
-
-   //---ONCLICK LISTENERS --------------------------------//
    // Dropdown toggle
     $('#dropdownMenuButton').on('click', function (event) {
         $('.dropdown-menu').toggle(); // Toggles the visibility of the dropdown menu
