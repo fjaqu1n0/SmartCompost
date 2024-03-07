@@ -1633,3 +1633,7 @@ input[type="range"]:active::-webkit-slider-thumb{
 table.dataTable tbody tr:nth-child(even):hover {
   background-color: #f2f2f2; /* Gray color on hover */
 }
+table.dataTable tbody tr.selected {
+  background-color: #3b3fc4 !important; /* Blue color for selected row */
+  color: white; /* Optional: Change text color if needed */
+}
