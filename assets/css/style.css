@@ -262,14 +262,14 @@ h6 {
 }
 
 /* Close Button */
-.btn-close {
-  background-size: 25%;
+/* .btn-close {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .btn-close:focus {
   outline: 0;
   box-shadow: none;
-}
+} */
 
 /* Accordion */
 .accordion-item {
@@ -1231,63 +1231,40 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
-/*--------------------------------------------------------------
-# End Footer
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Button Styles
---------------------------------------------------------------*
+
+/*Button styles*/
 /* Button container */
 .button-container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%; /* Ensure the container spans the full width */
+  display: flex; /* Use flexbox for layout */
 }
-
-.left-buttons {
-  display: flex;
-  gap: 10px; /* Adjust space between buttons */
-}
-
-.table-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px; /* Optional: Adjusts space between the header and the table */
-}
-
 
 /* Button styling */
-button, .dropdown-toggle {
-  background-color: #012970;
-  color: #ffffff;
-  border: 2px double #cccccc;
-  border-radius: 5px;
-  font-size: 15px;
-  cursor: pointer;
-  padding: 5px 10px;
-  transition: all 0.5s;
+button, .dropdown-toggle, .btn-dark {
+  background-color: #012970 !important;
+  color: #ffffff !important;
+  border: 2px double #cccccc !important;
+  border-radius: 5px !important;
+  font-size: 15px !important;
+  cursor: pointer !important;
+  padding: 5px 10px !important;
+  transition: all 0.5s !important;
 }
 
-button:hover, .dropdown-toggle:hover {
-  background-color: rgb(17, 30, 80);
+.btn-dark .no-border {
+  border: none !important;
+  border-radius: 0 !important; /* Set border radius to 0 to remove it */
 }
 
+button:hover, .dropdown-toggle:hover, .btn-dark:hover {
+  background-color: rgb(17, 30, 80) !important;
+}
+
+/* Add margin between Export and Delete buttons */
 #deleteButton {
-  padding: 5px 10px;
-  background-color: #012970;
-  color: white;
-  border: none;
-  cursor: pointer;
+  margin-left: 5px; /* Adjust the margin as needed */
 }
-/*--------------------------------------------------------------
-# End Button Styling
---------------------------------------------------------------*/
 
 
-/*--------------------------------------------------------------
-# Drop Down Menu Styling
---------------------------------------------------------------*/
 /* Dropdown menu styling */
 .dropdown-menu {
   display: none;
@@ -1312,36 +1289,11 @@ button:hover, .dropdown-toggle:hover {
   background-color: #f2f2f2;
 }
 
-.dropdown-menu1 {
-  display: none;
-  position: absolute;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #cccccc;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.dropdown-menu1 li a {
-  display: block;
-  padding: 8px 16px;
-  text-decoration: none;
-  color: #000000;
-  transition: background-color 0.3s;
-}
-
-.dropdown-menu1 li a:hover {
-  background-color: #f2f2f2;
-}
 /*--------------------------------------------------------------
-# End Dropdown Menu styling
+# End Footer
 --------------------------------------------------------------*/
 
-
-/*--------------------------------------------------------------
-# Toggle Button Styles
---------------------------------------------------------------*/
+/*Toggle Button styles*/
 .iconslist .container {
   position: relative;
   left: 10%;
@@ -1546,8 +1498,8 @@ button:hover, .dropdown-toggle:hover {
 }
 
 input[type="range"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  --webkit-appearance: none;
+  --moz-appearance: none;
   flex-grow: 1; 
   height: 5px; 
   background-color: #012970;;
@@ -1604,7 +1556,7 @@ cursor: pointer;
 }
 
 input[type="range"]::-moz-range-thumb{
-  -webkit-appearance: none;
+  --webkit-appearance: none;
   background-color: #3d59ab;
   height: 20px;
   width: 20px;
@@ -1626,14 +1578,35 @@ input[type="range"]:active::-webkit-slider-thumb{
   border: 3px solid #3d59ab;
 }
 
-/*--------------------------------------------------------------
-# Table Styles
---------------------------------------------------------------*/
-/* Hover effect for rows initially white */
-table.dataTable tbody tr:nth-child(even):hover {
-  background-color: #f2f2f2; /* Gray color on hover */
+.container .btn-dark{
+  border: 2px double #cccccc !important;
+  border-radius: 5px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  padding: 5px 10px !important;
+  transition: all 0.5s !important;
 }
-table.dataTable tbody tr.selected {
-  background-color: #3b3fc4 !important; /* Blue color for selected row */
-  color: white; /* Optional: Change text color if needed */
+
+.btn-close {
+  background-color: transparent !important;
+  color: initial !important;
+  border: none !important;
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  right: 10px !important;
+}
+
+.btn-close:hover {
+  background-color: transparent !important;
+  border: none !important;
+  color: #000000 !important;
+}
+
+table {
+  counter-reset: tableCount;     
+}
+.counterCell:before {              
+  content: counter(tableCount); 
+  counter-increment: tableCount; 
 }
