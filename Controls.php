@@ -44,55 +44,81 @@
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
 
-    <div class="d-flex align-items-center justify-content-between">  
-        <a href="Home.php" class="logo d-flex align-items-center">
-          <img src="assets/img/mmcm.png" alt="">
-          <span class="d-none d-lg-block">SmartCompost</span>
-        </a>
-        <i class="bi bi-list toggle-sidebar-btn"></i>        
-    </div>
-
-  </header><!-- End Header -->
-
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="Home.php">
-                <i class='bx bx-line-chart'></i>
-                <span>Home</span>
+        <div class="d-flex align-items-center justify-content-between">  
+            <a href="Home.php" class="logo d-flex align-items-center">
+              <img src="assets/img/mmcm.png" alt="">
+              <span class="d-none d-lg-block">SmartCompost</span>
             </a>
-        </li><!-- End Home Nav -->
+            <i class="bi bi-list toggle-sidebar-btn"></i>        
+        </div>
+        <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="Controls.php">
-                <i class='bx bxs-cog'></i>
-                <span>Controls</span>
-            </a>
-        </li><!-- End Controls Page Nav -->
+                <li class="nav-item dropdown pe-3">
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="DataTable.php">
-                <i class='bx bx-table'></i>
-                <span>Data Table</span>
-            </a>
-        </li><!-- End Data Logs Page Nav -->
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <span class="d-none d-md-block dropdown-toggle ps-2">Account</span>
+                    </a><!-- End Profile Iamge Icon -->
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="php/logout.php"> <!-- Changed href to logout.php -->
-                <i class='bx bx-log-out'></i>
-                <span>Logout</span>
-            </a>
-        </li><!-- End Data Logs Page Nav -->
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
 
-    </ul>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="accountManagement.php">
+                                <i class="bi bi-gear"></i>
+                                <span>Account Management</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
 
-  </aside><!-- End Sidebar-->
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="php/logout.php">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+
+                    </ul><!-- End Profile Dropdown Items -->
+                </li><!-- End Profile Nav -->
+
+            </ul>
+        </nav><!-- End Icons Navigation -->
+    
+    </header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="Home.php">
+                    <i class='bx bx-line-chart'></i>
+                    <span>Home</span>
+                </a>
+            </li><!-- End Home Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="Controls.php">
+                    <i class='bx bxs-cog'></i>
+                    <span>Controls</span>
+                </a>
+            </li><!-- End Controls Page Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="DataTable.php">
+                    <i class='bx bx-table'></i>
+                    <span>Data Table</span>
+                </a>
+            </li><!-- End Data Logs Page Nav -->
+
+        </ul>
+
+    </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
 

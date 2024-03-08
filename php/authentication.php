@@ -1,15 +1,7 @@
 <?php
     session_start(); // Start the session
-    
-    $host = "localhost";  
-    $user = "root";  
-    $password = '';  
-    $db_name = "testdb";  
-      
-    $con = mysqli_connect($host, $user, $password, $db_name);  
-    if(mysqli_connect_errno()) {  
-        die("Failed to connect with MySQL: ". mysqli_connect_error());  
-    }  
+    include "db_conn.php";
+
     $username = $_POST['user'];
     $password = $_POST['pass'];
 
@@ -19,7 +11,7 @@
     $username = mysqli_real_escape_string($con, $username);
     $password = mysqli_real_escape_string($con, $password);
 
-    $sql = "SELECT * FROM login WHERE username = '$username' AND password = '$password'";
+    $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
     $result = mysqli_query($con, $sql);
     $count = mysqli_num_rows($result);
 
