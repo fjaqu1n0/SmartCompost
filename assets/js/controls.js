@@ -137,8 +137,28 @@ function initSliders() {
 }
 
 // Clear Local Storage when the user is about to leave the page
-window.addEventListener('beforeunload', () => {
-  localStorage.clear();
+
+// Function to determine if a URL belongs to the same website
+function isSameWebsite(url) {
+  // Get the base URL of the current website
+  const currentBaseUrl = window.location.origin;
+  // Get the base URL of the target URL
+  const targetBaseUrl = new URL(url).origin;
+  // Compare the base URLs to determine if they are the same
+  return currentBaseUrl === targetBaseUrl;
+}
+
+// Add an event listener for the unload event
+window.addEventListener('unload', function(event) {
+  // Check if the target URL is within the same website
+  if (isSameWebsite(event.currentTarget.location.href)) {
+    // Perform cleanup tasks or other actions specific to navigation within the same website
+    console.log("Navigating within the same website");
+  } else {
+    // Perform cleanup tasks or other actions specific to leaving the website
+    console.log("Leaving the website");
+    localStorage.clear(); // Clear Local Storage when leaving the website
+  }
 });
 
 // Initialize sliders on page load
