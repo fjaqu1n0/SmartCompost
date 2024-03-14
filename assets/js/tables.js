@@ -27,6 +27,10 @@ var table = $('#sensorData').DataTable({
         },
         "dataSrc": function(json) {
             var deletedIds = JSON.parse(localStorage.getItem('deletedRowIds') || '[]');
+            if (json.totalRows === 0) {
+                localStorage.removeItem('dataTableEdits');
+                // Optionally, update this condition to better suit how you determine a significant change
+            }
             return json.filter(function(row) {
                 return deletedIds.indexOf(row.id) === -1;
             });
@@ -43,12 +47,40 @@ var table = $('#sensorData').DataTable({
         { "data": "soil_pH" }
     ],
     rowReorder: true,
-    "initComplete": function() {
-        // Retrieve the saved page number and set it after initialization
+   "initComplete": function() {
+        // Existing code for retrieving the saved page number
         var savedPage = localStorage.getItem('dataTableCurrentPage');
         if (savedPage !== null) {
-            this.api().page(parseInt(savedPage)).draw('page'); // Use 'page' draw to avoid redundant Ajax calls
+            this.api().page(parseInt(savedPage)).draw('page');
         }
+    
+        // New code to reapply saved edits
+        var edits = JSON.parse(localStorage.getItem('dataTableEdits') || '{}');
+        Object.entries(edits).forEach(([rowId, colValues]) => {
+            Object.entries(colValues).forEach(([colIdx, value]) => {
+                // Find the cell using rowId and colIdx and set its data
+                var cell = this.api().cell(rowId, colIdx);
+                if (cell.node()) { // Check if cell exists
+                    cell.data(value);
+                }
+            });
+        });
+    
+        // Redraw the table to apply the edits visually without resetting pagination
+        this.api().draw(false);
+    },
+    "drawCallback": function() {
+        var api = this.api();
+        var edits = JSON.parse(localStorage.getItem('dataTableEdits') || '{}');
+        Object.entries(edits).forEach(([rowId, colValues]) => {
+            Object.entries(colValues).forEach(([colIdx, value]) => {
+                var cell = api.cell(rowId, colIdx);
+                if (cell.node()) { // Check if the cell exists
+                    cell.data(value);
+                }
+            });
+        });
+        //api.draw(false); // Optional, depending on your needs
     }
   });
    // Retrieve the saved page number and set it
@@ -56,8 +88,6 @@ var table = $('#sensorData').DataTable({
    if (savedPage !== null) {
        table.page(parseInt(savedPage)).draw(false);
    }
-
-
        setInterval(function() {
         if (!isEditing) {
             var currentPage = table.page();
