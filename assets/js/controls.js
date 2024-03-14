@@ -7,7 +7,6 @@ function debounce(func, wait) {
   };
 }
 
-
 document.addEventListener('DOMContentLoaded', function() {
     // Reset mechanisms if this is a fresh page load or re-entry
     if (!sessionStorage.getItem('navigatingWithinSite')) {
@@ -25,44 +24,52 @@ document.addEventListener('DOMContentLoaded', function() {
     let txt2 = document.querySelector(".text2");
     let txt3 = document.querySelector(".text3");
 
+    let motorState = document.getElementById('motorState'); // Get the state element
+    let pumpState = document.getElementById('pumpState'); // Get the state element
+    let heaterState = document.getElementById('heaterState'); // Get the state element
+    let fanState = document.getElementById('fanState'); // Get the state element
+
+
     // Debounced function for toggling devices
     const debouncedToggleDevice = debounce(toggleDevice, 250); // Adjust the delay as needed
 
     // Function to update the switch state based on localStorage
     function updateSwitchState(element, textElement, storageKey) {
       const isSwitchActive = localStorage.getItem(storageKey) === "true";
-      element.classList.toggle("active", isSwitchActive);
-      textElement.innerHTML = isSwitchActive ? "ON" : "OFF";
+      if(textElement) { // Check if the element exists
+        textElement.innerHTML = isSwitchActive ? "ON" : "OFF";
+      }
     }
-
+    
     // Event listeners for toggling switches
     toggle.addEventListener("click", function () {
       toggle.classList.toggle("active");
       localStorage.setItem("toggleState", toggle.classList.contains("active"));
-      txt.innerHTML = toggle.classList.contains("active") ? "ON" : "OFF";
+      motorState.innerHTML = toggle.classList.contains("active") ? "ON" : "OFF"; 
       debouncedToggleDevice('motor', toggle.classList.contains("active") ? 'on' : 'off');
-    });
-
-    toggle1.addEventListener("click", function () {
+  });
+  
+  toggle1.addEventListener("click", function () {
       toggle1.classList.toggle("active");
       localStorage.setItem("toggle1State", toggle1.classList.contains("active"));
-      txt1.innerHTML = toggle1.classList.contains("active") ? "ON" : "OFF";
+      fanState.innerHTML = toggle1.classList.contains("active") ? "ON" : "OFF";  // Corrected to toggle1
       debouncedToggleDevice('fan', toggle1.classList.contains("active") ? 'on' : 'off');
-    });
-
-    toggle2.addEventListener("click", function () {
+  });
+  
+  toggle2.addEventListener("click", function () {
       toggle2.classList.toggle("active");
       localStorage.setItem("toggle2State", toggle2.classList.contains("active"));
-      txt2.innerHTML = toggle2.classList.contains("active") ? "ON" : "OFF";
+      pumpState.innerHTML = toggle2.classList.contains("active") ? "ON" : "OFF";  // Corrected to toggle2
       debouncedToggleDevice('pump', toggle2.classList.contains("active") ? 'on' : 'off');
-    });
-
-    toggle3.addEventListener("click", function () {
+  });
+  
+  toggle3.addEventListener("click", function () {
       toggle3.classList.toggle("active");
       localStorage.setItem("toggle3State", toggle3.classList.contains("active"));
-      txt3.innerHTML = toggle3.classList.contains("active") ? "ON" : "OFF";
+      heaterState.innerHTML = toggle3.classList.contains("active") ? "ON" : "OFF";  // Corrected to toggle3
       debouncedToggleDevice('heater', toggle3.classList.contains("active") ? 'on' : 'off');
-    });
+  });
+  
 
     // Initial setup to retrieve and apply stored switch states
     updateSwitchState(toggle, txt, "toggleState");
@@ -110,6 +117,29 @@ function initSliders() {
   const debouncedUpdate = debounce((id, value) => {
     sessionStorage.setItem(id, value); // Save to Session Storage
     localStorage.setItem(id, value); // Save to Local Storage
+
+  // Determine device type based on slider ID
+  let device, action = '';
+  if (id === 'Slide') {
+    device = 'motor';
+    action = '/speed/';
+  } else if (id === 'Slide1') {
+    device = 'fan';
+    action = '/speed/';
+  } else if (id === 'Slide2') {
+    device = 'pump';
+    action = '/speed/';
+  } else if (id === 'Slide3') {
+    device = 'heater';
+    action = '/speed/';
+  }
+    // If device is identified, send a fetch request to adjust its speed
+    if (device) {
+      fetch(`http://192.168.1.128:5000/control/${device}${action}${value}`, { method: 'GET' }) //10.15.0.140:5000 school
+        .then(response => response.text())
+        .then(data => console.log(`${device} ${action} set to ${value}: ${data}`))
+        .catch(error => console.error('Error:', error));
+    }
   }, 250);
 
   // Define your sliders and their corresponding value display elements
@@ -157,7 +187,7 @@ window.addEventListener('unload', function(event) {
   } else {
     // Perform cleanup tasks or other actions specific to leaving the website
     console.log("Leaving the website");
-    localStorage.clear(); // Clear Local Storage when leaving the website
+    localStorage.clear()
   }
 });
 
