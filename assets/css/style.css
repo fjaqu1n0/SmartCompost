@@ -57,6 +57,9 @@ h6 {
 # Page Title
 --------------------------------------------------------------*/
 .pagetitle {
+  display: flex;
+  justify-content: space-between; /* This aligns the children (h1 and button) on each side */
+  align-items: center; /* This vertically centers the children in the container */
   margin-bottom: 10px;
 }
 
@@ -65,6 +68,8 @@ h6 {
   margin-bottom: 0;
   font-weight: 600;
   color: #012970;
+  margin: 0;
+  display: inline-block;
 }
 
 /*--------------------------------------------------------------
@@ -1232,40 +1237,61 @@ h6 {
   color: #012970;
 }
 
-/*Button styles*/
+/*--------------------------------------------------------------
+# End Footer
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Button Styling
+--------------------------------------------------------------*/
+
 /* Button container */
 .button-container {
-  display: flex; /* Use flexbox for layout */
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Ensure the container spans the full width */
+}
+
+.left-buttons {
+  display: flex;
+  gap: 10px; /* Adjust space between buttons */
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px; /* Optional: Adjusts space between the header and the table */
 }
 
 /* Button styling */
-button, .dropdown-toggle, .btn-dark {
-  background-color: #012970 !important;
-  color: #ffffff !important;
-  border: 2px double #cccccc !important;
-  border-radius: 5px !important;
-  font-size: 15px !important;
-  cursor: pointer !important;
-  padding: 5px 10px !important;
-  transition: all 0.5s !important;
+button, .dropdown-toggle {
+  background-color: #012970;
+  color: #ffffff;
+  border: 2px double #cccccc;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: all 0.5s;
 }
 
-.btn-dark .no-border {
-  border: none !important;
-  border-radius: 0 !important; /* Set border radius to 0 to remove it */
+button:hover, .dropdown-toggle:hover {
+  background-color: rgb(17, 30, 80);
 }
 
-button:hover, .dropdown-toggle:hover, .btn-dark:hover {
-  background-color: rgb(17, 30, 80) !important;
-}
-
-/* Add margin between Export and Delete buttons */
 #deleteButton {
-  margin-left: 5px; /* Adjust the margin as needed */
+  padding: 5px 10px;
+  background-color: #012970;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
+/*--------------------------------------------------------------
+# Drop Down Menu Styling
+--------------------------------------------------------------*/
 
-/* Dropdown menu styling */
 .dropdown-menu {
   display: none;
   position: absolute;
@@ -1289,11 +1315,33 @@ button:hover, .dropdown-toggle:hover, .btn-dark:hover {
   background-color: #f2f2f2;
 }
 
-/*--------------------------------------------------------------
-# End Footer
---------------------------------------------------------------*/
+.dropdown-menu1 {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #cccccc;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 
-/*Toggle Button styles*/
+.dropdown-menu1 li a {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #000000;
+  transition: background-color 0.3s;
+}
+
+.dropdown-menu1 li a:hover {
+  background-color: #f2f2f2;
+}
+
+
+/*--------------------------------------------------------------
+# Toggle Menu Styling
+--------------------------------------------------------------*/
 .iconslist .container {
   position: relative;
   left: 10%;
