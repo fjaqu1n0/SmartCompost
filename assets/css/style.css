@@ -1265,19 +1265,24 @@ h6 {
 }
 
 /* Button styling */
-button, .dropdown-toggle {
-  background-color: #012970;
-  color: #ffffff;
-  border: 2px double #cccccc;
-  border-radius: 5px;
-  font-size: 15px;
-  cursor: pointer;
-  padding: 5px 10px;
-  transition: all 0.5s;
+button, .dropdown-toggle, .btn-dark {
+  background-color: #012970 !important;
+  color: #ffffff !important;
+  border: 2px double #cccccc !important;
+  border-radius: 5px !important;
+  font-size: 15px !important;
+  cursor: pointer !important;
+  padding: 5px 10px !important;
+  transition: all 0.5s !important;
 }
 
-button:hover, .dropdown-toggle:hover {
-  background-color: rgb(17, 30, 80);
+.btn-dark .no-border {
+  border: none !important;
+  border-radius: 0 !important; /* Set border radius to 0 to remove it */
+}
+
+button:hover, .dropdown-toggle:hover, .btn-dark:hover {
+  background-color: rgb(17, 30, 80) !important;
 }
 
 #deleteButton {
@@ -1626,14 +1631,14 @@ input[type="range"]:active::-webkit-slider-thumb{
   border: 3px solid #3d59ab;
 }
 
-.container .btn-dark{
+/* .container .btn-dark{
   border: 2px double #cccccc !important;
   border-radius: 5px !important;
   font-size: 15px !important;
   font-weight: 600 !important;
   padding: 5px 10px !important;
   transition: all 0.5s !important;
-}
+} */
 
 .btn-close {
   background-color: transparent !important;
@@ -1650,6 +1655,8 @@ input[type="range"]:active::-webkit-slider-thumb{
   border: none !important;
   color: #000000 !important;
 }
+
+.btn-close
 
 table {
   counter-reset: tableCount;     
