@@ -1,15 +1,6 @@
 <?php
 // Connect to the MySQL database
-$servername = "localhost";
-$username = "root";
-$password = '';
-$dbname = "testdb";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'db_conn.php';
 
 // Query the database for the latest sensor data and isActive status
 $sql = "SELECT * FROM sensor_data_single ORDER BY timestamp DESC LIMIT 1";
