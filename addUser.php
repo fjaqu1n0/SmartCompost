@@ -121,8 +121,8 @@
       <h1>Add an Account</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-          <li class="breadcrumb-item"><a href="accountmanagement.php">Account Management</a></li>
+         <li class="breadcrumb-item"><a href="Home.php">Home</a></li>
+          <li class="breadcrumb-item"><a href="accountManagement.php">Account Management</a></li>
           <li class="breadcrumb-item active">Add an Account</li>
         </ol>
       </nav>
