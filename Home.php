@@ -56,7 +56,8 @@
               <img src="assets/img/mmcm.png" alt="">
               <span class="d-none d-lg-block">SmartCompost</span>
             </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>        
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+            <button id="startButton">Start Data</button> 
         </div>
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
@@ -221,9 +222,10 @@
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/sensors.js"></script>
+     <script src="assets/js/data.js"></script>
 
     <!--  jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
