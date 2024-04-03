@@ -56,7 +56,8 @@
               <img src="assets/img/mmcm.png" alt="">
               <span class="d-none d-lg-block">SmartCompost</span>
             </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>        
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+	    <button id="startButton">Start Data</button> 
         </div>
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
@@ -232,10 +233,12 @@
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/data.js"></script>
 
 	<script>
 		const myModal = document.getElementById('myModal')
