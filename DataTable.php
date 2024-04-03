@@ -64,6 +64,7 @@
         <span class="d-none d-lg-block">SmartCompost</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
+      <button id="startButton">Start Data</button> 
     </div><!-- End Logo -->
 
       <nav class="header-nav ms-auto">
@@ -293,6 +294,7 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <script src ="assets/js/main.js"></script>
+  <script src="assets/js/data.js"></script>
 
 </body>
 
